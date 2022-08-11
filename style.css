@@ -1,0 +1,23 @@
+.box{
+    height: 200px;
+    width: 200px;
+    background-color: rgb(234, 47, 30);
+  }  
+  .two{
+    height: 200px;
+    width: 200px;
+    background-color: rgb(255, 230, 0);
+  }
+  .three{
+    height: 200px;
+    width: 200px;
+    background-color: rgb(49, 211, 24);
+  }
+ [v-cloak]{
+  display: none;
+ }
+ .largeBox{
+  width: 100px;
+  height: 100px;
+  background-color: rgb(248, 155, 41);
+ }
