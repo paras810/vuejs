@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Vue Js</title>
+  <style>
+    .box{
+      height: 200px;
+      width: 200px;
+      background-color: rgb(234, 47, 30);
+    }
+    .two{
+      height: 200px;
+      width: 200px;
+      background-color: rgb(255, 230, 0);
+    }
+    .three{
+      height: 200px;
+      width: 200px;
+      background-color: rgb(49, 211, 24);
+    }
+   [v-cloak]{
+    display: none;
+   }
+  </style>
+</head>
+
+<body>
+
+  <div id="app" v-cloak>
+    {{ message }}
+    <input v-model='message'>
+    <hr>
+
+    <!-- directives in vue js -->
+    <!-- <div v-show="!isVisible" class="box"></div> -->
+    <div v-if="!isVisible" class="box"></div>
+    <div v-else-if="isVisible2" class="box two"></div>
+    <div v-else class="box three"></div>
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3"></script>
+  <script>
+    let app = Vue.createApp({
+      data: () => {
+        return {
+          message: 'Vue js🥰',
+          isVisible: false,
+          isVisible2: true,
+        }
+      }
+    }).mount('#app')
+  // app.mount('#app')
+
+  </script>
+
+</body>
+
+</html>
