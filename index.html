@@ -11,9 +11,9 @@
 <body>
 
   <div id="app" v-cloak>
-    <login-form/>
+    <login-form />
     <hr>
-    
+
 
     <button @click="toggleBox">Show Box</button>
     <div class="box" v-if="isVisible"></div>
@@ -40,29 +40,63 @@
       }
     })
     // @submit.prevent is short form of e.preventDefault()
-app.component('login-form',{
-  template: `
+    // :label is short form of v-bind:label
+    // label='enter the email'
+    app.component('login-form', {
+      template: `
   <form @submit.prevent='handleSubmit'> 
     <h1> {{title}} </h1>
-    <input type="email" v-model='email'>
-    <input type="password" v-model='password'>
+    <custom-input v-model='email'  :label='emailLabel' />
+    <custom-input v-model="password" v-bind:label='passwordLabel' />
     <button>login</button>
     </form>
   `,
-  data(){
-    return {
-      title: `Login Form`,
-      email: '',
-      password:''
-    }
-  },
-  methods: {
-    handleSubmit(){
-      console.log('submitted')
-      console.log(this.email, this.password)
-    }
-  },
-})
+      components: ['custom-input']
+      ,
+      data() {
+        return {
+          title: `Login Form`,
+          email: 'button',
+          password: 'radio',
+          emailLabel: 'Email'
+          , passwordLabel: 'Password'
+        }
+      },
+      methods: {
+        handleSubmit() {
+          console.log('submitted')
+          console.log(this.email, this.password)
+        }
+
+      },
+    })
+
+    app.component('custom-input', {
+      template: `
+  <label>
+    {{label}}
+    <input type='text' v-model='inputVal'>
+    </label>
+  `,
+      props: ['label', 'modelValue'],
+      computed: {
+        inputVal: {
+          get() {
+            return this.modelValue
+          },
+          set(value) {
+            // console.log(value)
+            this.$emit('update:modelValue', value)
+          }
+        }
+      }
+      // data() {
+      //   return {
+      //     inputVal: ''
+      //   }
+      // },
+    })
+
     app.mount('#app')
 
   </script>
