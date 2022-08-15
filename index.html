@@ -11,109 +11,42 @@
 <body>
 
   <div id="app" v-cloak>
-    <login-form />
-    <hr>
-
-
-    <button @click="toggleBox">Show Box</button>
-    <div class="box" v-if="isVisible"></div>
+    <button @click="toggleBox" >hide/show</button>
+    <red_box v-if="isVisible"/>
   </div>
 
   <script src="https://unpkg.com/vue@3"></script>
   <!-- <script src="./index.js"></script> -->
   <script>
-    // alert('57:30')
     let app = Vue.createApp({
       data: function () {
         return {
-          message: 'Vue js',
           isVisible: false,
         }
       },
       methods: {
-        toggleBox() {
+        toggleBox :function() {
           this.isVisible = !this.isVisible
-        },
-        greet(inpVal) {
-          // press enter to see output
-          console.log(inpVal)
-        }
-      }
-    })
-    // @submit.prevent is short form of e.preventDefault()
-    // :label is short form of v-bind:label
-    // label='enter the email'
-    app.component('login-form', {
-      template: `
-  <form @submit.prevent='handleSubmit'> 
-    <h1> {{title}} </h1>
-    <p v-for='(str,i) in inputs' :key='i' >{{i}}</p>
-       <custom-input 
-         v-for='(input,i) in inputs'
-       :key='i'
-           v-model='input.value' 
-         :label='input.label' 
-         :type='input.type'
-      />
-    <button>login</button>
-    </form>
-  `,
-      components: ['custom-input']
-      ,
-      data() {
-        return {
-          title: `Login Form`,
-          inputs: [
-            {
-              label: '#Email',
-              value: '',
-              type: 'email'
-            },
-            {
-              label: '#Password',
-              value: '',
-              type: 'password'
-            }
-          ],
-          email: '',
-          password: '',
-          emailLabel: 'Email'
-          , passwordLabel: 'Password'
         }
       },
-      methods: {
-        handleSubmit() {
-          console.log('submitted')
-          console.log(this.inputs[0].value, this.inputs[1].value)
-        }
-
+      updated() {
+        console.log('updated')
       },
     })
-
-    app.component('custom-input', {
-      template: `
-  <label>
-    {{label}}
-    <input :type='type' v-model='inputVal'>
-    </label>
-  `,
-      props: ['label', 'type','modelValue'],
-      computed: {
-        inputVal: {
-          get() {
-            return this.modelValue
-          },
-          set(value) {
-            // console.log(value)
-            this.$emit('update:modelValue', value)
-          }
-        }
-      }
-      // data() {
-      //   return {
-      //     inputVal: ''
-      //   }
-      // },
+    app.component('red_box',{
+      template:`
+      <div class="box"></div>
+      `,
+      created() {
+        console.log('created')
+      },
+      mounted() {
+        console.log('mounted')
+      },
+      
+      unmounted() {
+        console.log('unmounted')
+      },
     })
 
     app.mount('#app')
